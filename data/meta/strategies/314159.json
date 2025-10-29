@@ -1,0 +1,38 @@
+{
+	"lastUpdate": "2025-10-29T12:27:14.573765+09:00",
+	"version": {
+		"major": 0,
+		"minor": 1,
+		"patch": 96
+	},
+	"shouldRefresh": false,
+	"strategies": {
+		"0xa06BB144E1801f232A0a902Ec934343B0D6E4199_0x641e8D9634a069d3FE32542207fFC233DF4eED19": {
+			"address": "0xa06bb144e1801f232a0a902ec934343b0d6e4199",
+			"vaultAddress": "0x641e8d9634a069d3fe32542207ffc233df4eed19",
+			"name": "Secured Finance Staging-USDFC Lender",
+			"vaultVersion": "3.0.4",
+			"displayName": "",
+			"description": "",
+			"activation": 3088760,
+			"chainID": 314159,
+			"doHealthCheck": false,
+			"isActive": true,
+			"isInQueue": true,
+			"isRetired": false,
+			"status": "active",
+			"keepCRV": null,
+			"keepCRVPercent": null,
+			"keepCVX": null,
+			"lastTotalDebt": "631378605971030903245",
+			"lastTotalLoss": "0",
+			"lastTotalGain": "0",
+			"lastPerformanceFee": "1000",
+			"lastReport": "1761615720",
+			"lastDebtRatio": "10000",
+			"netAPR": 0,
+			"aprType": "",
+			"protocols": null
+		}
+	}
+}

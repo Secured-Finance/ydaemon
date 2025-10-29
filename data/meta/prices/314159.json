@@ -1,0 +1,23 @@
+{
+	"lastUpdate": "2025-10-29T12:27:16.954767+09:00",
+	"version": {
+		"major": 0,
+		"minor": 1,
+		"patch": 108
+	},
+	"shouldRefresh": false,
+	"prices": {
+		"0x641e8d9634a069d3fe32542207ffc233df4eed19": {
+			"address": "0x641e8d9634a069d3fe32542207ffc233df4eed19",
+			"price": "0",
+			"humanizedPrice": 0,
+			"source": "yVaultV2-pps-store"
+		},
+		"0x94862f5082c888bb2c54aae6a4c3aa01a3bc5585": {
+			"address": "0x94862f5082c888bb2c54aae6a4c3aa01a3bc5585",
+			"price": "0",
+			"humanizedPrice": 0,
+			"source": "yVaultV2-pps-store"
+		}
+	}
+}

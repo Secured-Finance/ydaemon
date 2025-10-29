@@ -80,18 +80,11 @@ func SetEnv() {
 **************************************************************************************************/
 func init() {
 	godotenv.Load(`.env`)
-	ETHEREUM.SubgraphURI = os.Getenv("SUBGRAPGH_FOR_1")
-	OPTIMISM.SubgraphURI = os.Getenv("SUBGRAPGH_FOR_10")
-	ARBITRUM.SubgraphURI = os.Getenv("SUBGRAPGH_FOR_42161")
-	CHAINS[1] = ETHEREUM
-	CHAINS[10] = OPTIMISM
-	CHAINS[100] = GNOSIS
-	CHAINS[137] = POLYGON
-	CHAINS[146] = SONIC
-	CHAINS[250] = FANTOM
-	CHAINS[8453] = BASE
-	CHAINS[42161] = ARBITRUM
-	CHAINS[747474] = KATANA
+	// ETHEREUM.SubgraphURI = os.Getenv("SUBGRAPGH_FOR_1")
+	// ARBITRUM.SubgraphURI = os.Getenv("SUBGRAPGH_FOR_42161")
+	// CHAINS[1] = ETHEREUM
+	// CHAINS[42161] = ARBITRUM
+	CHAINS[314159] = FILECOIN_CALIBRATION
 	SetEnv()
 
 	// Set them as supported

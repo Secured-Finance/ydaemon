@@ -27,6 +27,8 @@ var GECKO_CHAIN_NAMES = map[uint64]string{
 	8453:   `base`,
 	42161:  `arbitrum-one`,
 	747474: `katana`,
+	314:    `filecoin`,
+	314159: `filecoin-calibration`,
 }
 
 var keyIndexToUse uint64 = 0

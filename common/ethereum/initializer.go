@@ -1,13 +1,31 @@
 package ethereum
 
 import (
+	"context"
+	"net/http"
 	"os"
 	"strconv"
 
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/yearn/ydaemon/common/env"
 	"github.com/yearn/ydaemon/common/logs"
 )
+
+/**************************************************************************************************
+** authTransport is a custom HTTP transport that adds Authorization header to all requests
+***************************************************************************************************/
+type authTransport struct {
+	authHeader string
+	Transport  http.RoundTripper
+}
+
+func (t *authTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	// Clone the request to avoid modifying the original
+	reqClone := req.Clone(req.Context())
+	reqClone.Header.Set("Authorization", t.authHeader)
+	return t.Transport.RoundTrip(reqClone)
+}
 
 /**************************************************************************************************
 ** The init function is a special function triggered directly on execution of the package.
@@ -26,11 +44,40 @@ func Initialize() {
 	// Create the RPC client for all the chains supported by yDaemon
 	for _, chain := range env.GetChains() {
 		logs.Info(`Dial RPC URI for chain`, chain.ID)
-		client, err := ethclient.Dial(GetRPCURI(chain.ID))
-		if err != nil {
-			logs.Error(err, "Failed to connect to node")
-			continue
+		rpcURI := GetRPCURI(chain.ID)
+
+		// Check if Authorization token is configured for this chain (Bearer authentication)
+		authToken := os.Getenv("RPC_AUTH_TOKEN_FOR_" + strconv.FormatUint(chain.ID, 10))
+
+		var client *ethclient.Client
+		var err error
+
+		if authToken != "" {
+			// Create custom HTTP client with Bearer Authorization header
+			httpClient := &http.Client{
+				Transport: &authTransport{
+					authHeader: "Bearer " + authToken,
+					Transport:  http.DefaultTransport,
+				},
+			}
+
+			// Create RPC client with custom HTTP client
+			ctx := context.Background()
+			rpcClient, err := rpc.DialOptions(ctx, rpcURI, rpc.WithHTTPClient(httpClient))
+			if err != nil {
+				logs.Error(err, "Failed to connect to node with auth")
+				continue
+			}
+			client = ethclient.NewClient(rpcClient)
+		} else {
+			// Use default dial without custom headers
+			client, err = ethclient.Dial(rpcURI)
+			if err != nil {
+				logs.Error(err, "Failed to connect to node")
+				continue
+			}
 		}
+
 		RPC[chain.ID] = client
 	}
 
@@ -42,9 +89,10 @@ func Initialize() {
 			rpcToUse = multiCallURI
 		}
 
-		MulticallClientForChainID[chain.ID] = NewMulticall(
+		MulticallClientForChainID[chain.ID] = NewMulticallWithAuth(
 			rpcToUse,
 			chain.MulticallContract.Address,
+			chain.ID,
 		)
 	}
 

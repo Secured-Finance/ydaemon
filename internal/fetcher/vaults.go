@@ -265,6 +265,17 @@ func RetrieveAllVaults(
 			vault.Metadata.Category = models.VaultCategoryAutomatic
 		}
 
+		/******************************************************************************************
+		** Special case: For Filecoin and Filecoin Calibration, vaults don't use registries
+		** so mark all vaults as Yearn by default if inclusion is not yet set
+		******************************************************************************************/
+		if !vault.Metadata.Inclusion.IsSet && (chainID == 314 || chainID == 314159) {
+			vault.Metadata.Inclusion.IsYearn = true
+			vault.Metadata.Inclusion.IsSet = true
+			vault.Endorsed = true
+			vault.Metadata.IsHidden = false
+		}
+
 		storage.StoreVault(chainID, vault)
 	}
 
@@ -301,6 +312,12 @@ func RetrieveAllVaults(
 			vault.Metadata.Inclusion.IsMorpho = false //False by default
 			vault.Metadata.Inclusion.IsKatana = false //False by default
 			vault.Metadata.Inclusion.IsGimme = false  //False by default
+
+			// Special case: For Filecoin and Filecoin Calibration, vaults don't use registries
+			// so mark all vaults as Yearn by default
+			if chainID == 314 || chainID == 314159 {
+				vault.Metadata.Inclusion.IsYearn = true
+			}
 
 			isYearn := vault.Metadata.Inclusion.IsYearn || vault.Metadata.Inclusion.IsYearnJuiced || vault.Metadata.Inclusion.IsGimme
 			isPublic := vault.Metadata.Inclusion.IsPublicERC4626

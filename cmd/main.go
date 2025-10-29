@@ -38,7 +38,7 @@ func main() {
 	initFlags()
 	ethereum.Initialize()
 	storage.InitializeStorage()
-	go ListenToSignals()
+	// go ListenToSignals()
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -47,7 +47,7 @@ func main() {
 
 	logs.Info(`Running yDaemon server process...`)
 	go NewRouter().Run(`:` + port)
-	go TriggerTgMessage(`💛 - yDaemon v` + GetVersion() + ` is ready to accept requests: https://ydaemon.yearn.fi/`)
+	// go TriggerTgMessage(`💛 - yDaemon v` + GetVersion() + ` is ready to accept requests: https://ydaemon.yearn.fi/`)
 
 	logs.Info(`Starting indexing processes for ` + strconv.Itoa(len(chains)) + ` chains: ` + fmt.Sprintf("%v", chains))
 	for _, chainID := range chains {

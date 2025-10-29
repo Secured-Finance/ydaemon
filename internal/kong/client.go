@@ -114,9 +114,16 @@ func (c *Client) executeQuery(ctx context.Context, query string, variables map[s
 }
 
 func (c *Client) FetchVaultsForChain(ctx context.Context, chainID uint64) ([]KongVault, error) {
-	query := `
+	// For Filecoin and Filecoin Calibration, don't filter by yearn flag
+	// as these are experimental vaults without the yearn flag set
+	yearnFilter := ""
+	if chainID != 314 && chainID != 314159 {
+		yearnFilter = ", yearn: true"
+	}
+
+	query := fmt.Sprintf(`
 		query FetchVaults($chainId: Int!) {
-			vaults(chainId: $chainId, yearn: true) {
+			vaults(chainId: $chainId%s) {
 				address
 				chainId
 				asset {
@@ -144,7 +151,7 @@ func (c *Client) FetchVaultsForChain(ctx context.Context, chainID uint64) ([]Kon
 				}
 			}
 		}
-	`
+	`, yearnFilter)
 
 	variables := map[string]interface{}{
 		"chainId": int(chainID),

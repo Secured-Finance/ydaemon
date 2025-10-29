@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"errors"
 	"math/big"
+	"net/http"
+	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -15,6 +17,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/math"
 	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/yearn/ydaemon/common/contracts"
 	"github.com/yearn/ydaemon/common/logs"
 )
@@ -53,15 +56,52 @@ func (call Call) GetMultiCall() contracts.Multicall3Call {
 // will later use to perform multiple ethereum calls batched in the same transaction.
 // For performance reason, this should be initialized once and then reused.
 func NewMulticall(rpcURI string, multicallAddress common.Address) TEthMultiCaller {
+	return NewMulticallWithAuth(rpcURI, multicallAddress, 0)
+}
+
+// NewMulticallWithAuth creates a new instance of a TEthMultiCaller with optional auth support.
+// If chainID is provided and an auth token is configured, it will be used for requests.
+func NewMulticallWithAuth(rpcURI string, multicallAddress common.Address, chainID uint64) TEthMultiCaller {
 	if rpcURI == "" {
 		logs.Error("No rpcURI provided.")
 		return TEthMultiCaller{}
 	}
-	client, err := ethclient.Dial(rpcURI)
-	if err != nil {
-		logs.Error(err)
-		time.Sleep(time.Second)
-		return NewMulticall(rpcURI, multicallAddress)
+
+	// Check if Authorization token is configured for this chain
+	var authToken string
+	if chainID != 0 {
+		authToken = os.Getenv("RPC_AUTH_TOKEN_FOR_" + strconv.FormatUint(chainID, 10))
+	}
+
+	var client *ethclient.Client
+	var err error
+
+	if authToken != "" {
+		// Create custom HTTP client with Bearer Authorization header
+		httpClient := &http.Client{
+			Transport: &authTransport{
+				authHeader: "Bearer " + authToken,
+				Transport:  http.DefaultTransport,
+			},
+		}
+
+		// Create RPC client with custom HTTP client
+		ctx := context.Background()
+		rpcClient, err := rpc.DialOptions(ctx, rpcURI, rpc.WithHTTPClient(httpClient))
+		if err != nil {
+			logs.Error(err, "Failed to connect to multicall node with auth")
+			time.Sleep(time.Second)
+			return NewMulticallWithAuth(rpcURI, multicallAddress, chainID)
+		}
+		client = ethclient.NewClient(rpcClient)
+	} else {
+		// Use default dial without custom headers
+		client, err = ethclient.Dial(rpcURI)
+		if err != nil {
+			logs.Error(err, "Failed to connect to multicall node")
+			time.Sleep(time.Second)
+			return NewMulticallWithAuth(rpcURI, multicallAddress, chainID)
+		}
 	}
 
 	// Load Multicall abi for later use
@@ -69,7 +109,7 @@ func NewMulticall(rpcURI string, multicallAddress common.Address) TEthMultiCalle
 	if err != nil {
 		logs.Error(err)
 		time.Sleep(time.Second)
-		return NewMulticall(rpcURI, multicallAddress)
+		return NewMulticallWithAuth(rpcURI, multicallAddress, chainID)
 	}
 
 	return TEthMultiCaller{
