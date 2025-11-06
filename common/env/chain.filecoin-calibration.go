@@ -48,18 +48,7 @@ var FILECOIN_CALIBRATION = TChain{
 		},
 	},
 	APROracleContract:     TContractData{Address: common.Address{}, Block: 0},
-	ExtraVaults:           []models.TVaultsFromRegistry{
-		{
-			//PoolTogether
-			ChainID:         42161,
-			Address:         common.HexToAddress(`0x641e8D9634a069d3FE32542207fFC233DF4eED19`),
-			RegistryAddress: common.HexToAddress(`0x0377b4daDDA86C89A0091772B79ba67d0E5F7198`),
-			TokenAddress:    common.HexToAddress(`0xb3042734b608a1B16e9e86B374A3f3e389B4cDf0`),
-			APIVersion:      `3.0.2`,
-			BlockNumber:     3088760,
-			Type:            models.TokenTypeAutomatedVault,
-		},
-	},
+	ExtraVaults:       []models.TVaultsFromRegistry{},
 	BlacklistedVaults:     []common.Address{},
 	ExtraTokens:           []common.Address{},
 	IgnoredTokens:         []common.Address{},

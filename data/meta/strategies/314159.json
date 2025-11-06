@@ -1,9 +1,9 @@
 {
-	"lastUpdate": "2025-10-29T12:27:14.573765+09:00",
+	"lastUpdate": "2025-11-12T14:33:33.322442+09:00",
 	"version": {
 		"major": 0,
 		"minor": 1,
-		"patch": 96
+		"patch": 39
 	},
 	"shouldRefresh": false,
 	"strategies": {
@@ -24,11 +24,11 @@
 			"keepCRV": null,
 			"keepCRVPercent": null,
 			"keepCVX": null,
-			"lastTotalDebt": "631378605971030903245",
+			"lastTotalDebt": "716605771202331156847",
 			"lastTotalLoss": "0",
 			"lastTotalGain": "0",
 			"lastPerformanceFee": "1000",
-			"lastReport": "1761615720",
+			"lastReport": "1762487250",
 			"lastDebtRatio": "10000",
 			"netAPR": 0,
 			"aprType": "",

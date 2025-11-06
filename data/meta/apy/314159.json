@@ -1,28 +1,28 @@
 {
-	"lastUpdate": "2025-10-29T12:27:17.386558+09:00",
+	"lastUpdate": "2025-11-12T14:33:36.969988+09:00",
 	"version": {
-		"major": 0,
-		"minor": 1,
-		"patch": 108
+		"major": 2,
+		"minor": 0,
+		"patch": 0
 	},
 	"shouldRefresh": false,
 	"apy": {
 		"0x641e8d9634a069d3fe32542207ffc233df4eed19": {
 			"type": "v3:averaged",
-			"netAPY": -0.31872696321446997,
+			"netAPY": 1.2202745887596467,
 			"fees": {
 				"performance": 0,
 				"management": 0
 			},
 			"points": {
-				"weekAgo": 0.05222783320958339,
-				"monthAgo": -0.31872696321446997,
-				"inception": -0.31872696321446997
+				"weekAgo": 4.918457564093273,
+				"monthAgo": 1.2202745887596467,
+				"inception": 0.897293917411987
 			},
 			"pricePerShare": {
-				"today": 0.9825355088649605,
-				"weekAgo": 0.9815523568937927,
-				"monthAgo": 1
+				"today": 1.0811252034920427,
+				"weekAgo": 0.9879365263268526,
+				"monthAgo": 0.9825762080257195
 			},
 			"extra": {
 				"stakingRewardsAPY": null,
@@ -41,22 +41,22 @@
 				}
 			}
 		},
-		"0x94862f5082c888bb2c54aae6a4c3aa01a3bc5585": {
+		"0xa06bb144e1801f232a0a902ec934343b0d6e4199": {
 			"type": "v3:averaged",
-			"netAPY": 0,
+			"netAPY": 1.7190451513761222,
 			"fees": {
 				"performance": 0,
 				"management": 0
 			},
 			"points": {
-				"weekAgo": 0,
-				"monthAgo": 0,
-				"inception": 0
+				"weekAgo": 0.7813039913919454,
+				"monthAgo": 1.7190451513761222,
+				"inception": 1.3428212702215792
 			},
 			"pricePerShare": {
-				"today": 1,
-				"weekAgo": 1,
-				"monthAgo": 1
+				"today": 1.1214057586775674,
+				"weekAgo": 1.104850771759547,
+				"monthAgo": 0.9825762080257195
 			},
 			"extra": {
 				"stakingRewardsAPY": null,

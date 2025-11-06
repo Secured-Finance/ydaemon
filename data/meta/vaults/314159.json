@@ -1,9 +1,9 @@
 {
-	"lastUpdate": "2025-10-29T12:27:14.234934+09:00",
+	"lastUpdate": "2025-11-12T14:33:31.058939+09:00",
 	"version": {
 		"major": 0,
 		"minor": 1,
-		"patch": 48
+		"patch": 10
 	},
 	"shouldRefresh": false,
 	"vaults": {
@@ -23,8 +23,8 @@
 			"lastActiveStrategies": [
 				"0xa06bb144e1801f232a0a902ec934343b0d6e4199"
 			],
-			"lastPricePerShare": "982517867060758915",
-			"lastTotalAssets": "631378605971030903245",
+			"lastPricePerShare": "1080699615862818791",
+			"lastTotalAssets": "716605771202331156847",
 			"metadata": {
 				"isRetired": false,
 				"isHidden": false,
@@ -43,9 +43,9 @@
 					"stability": "Unknown"
 				},
 				"category": "Stablecoin",
-				"displayName": "",
+				"displayName": "USDFC",
 				"displaySymbol": "",
-				"description": "",
+				"description": "Multi strategy USDFC vault. \u003cbr/\u003e\u003cbr/\u003eMulti strategy vaults are (wait for it) vaults that contain multiple strategies. Multi strategy vaults give the vault creator flexibility to balance risk and opportunity across multiple different strategies.",
 				"sourceURI": "",
 				"uiNotice": "",
 				"protocols": null,
@@ -89,10 +89,78 @@
 			"endorsed": true,
 			"performanceFee": 0,
 			"managementFee": 0,
-			"emergencyShutdown": false,
+			"emergencyShutdown": true,
 			"lastActiveStrategies": [],
 			"lastPricePerShare": "1000000000000000000",
 			"lastTotalAssets": "0",
+			"metadata": {
+				"isRetired": true,
+				"isHidden": false,
+				"isAggregator": false,
+				"isBoosted": false,
+				"isAutomated": false,
+				"isHighlighted": false,
+				"isPool": false,
+				"shouldUseV2APR": false,
+				"migration": {
+					"available": false,
+					"target": "0x94862f5082c888bb2c54aae6a4c3aa01a3bc5585",
+					"contract": "0x0000000000000000000000000000000000000000"
+				},
+				"stability": {
+					"stability": "Unknown"
+				},
+				"category": "Stablecoin",
+				"displayName": "",
+				"displaySymbol": "",
+				"description": "",
+				"sourceURI": "",
+				"uiNotice": "",
+				"protocols": null,
+				"inclusion": {
+					"isSet": true,
+					"isYearn": true,
+					"isYearnJuiced": false,
+					"isGimme": false,
+					"isPoolTogether": false,
+					"isCove": false,
+					"isMorpho": false,
+					"isKatana": false,
+					"isPublicERC4626": false
+				},
+				"riskLevel": 0,
+				"riskScore": {
+					"review": 0,
+					"testing": 0,
+					"complexity": 0,
+					"riskExposure": 0,
+					"protocolIntegration": 0,
+					"centralizationRisk": 0,
+					"externalProtocolAudit": 0,
+					"externalProtocolCentralisation": 0,
+					"externalProtocolTvl": 0,
+					"externalProtocolLongevity": 0,
+					"externalProtocolType": 0,
+					"comment": ""
+				}
+			}
+		},
+		"0xa06bb144e1801f232a0a902ec934343b0d6e4199": {
+			"address": "0xa06bb144e1801f232a0a902ec934343b0d6e4199",
+			"token": "0xb3042734b608a1b16e9e86b374a3f3e389b4cdf0",
+			"registry": "0x0000000000000000000000000000000000000000",
+			"type": "Yearn Vault",
+			"kind": "Multi Strategy",
+			"version": "",
+			"activation": 3088753,
+			"chainID": 314159,
+			"endorsed": true,
+			"performanceFee": 0,
+			"managementFee": 0,
+			"emergencyShutdown": false,
+			"lastActiveStrategies": [],
+			"lastPricePerShare": "1121405758677567368",
+			"lastTotalAssets": "1178124294610495570504",
 			"metadata": {
 				"isRetired": false,
 				"isHidden": false,
@@ -104,7 +172,7 @@
 				"shouldUseV2APR": false,
 				"migration": {
 					"available": false,
-					"target": "0x94862f5082c888bb2c54aae6a4c3aa01a3bc5585",
+					"target": "0xa06bb144e1801f232a0a902ec934343b0d6e4199",
 					"contract": "0x0000000000000000000000000000000000000000"
 				},
 				"stability": {
