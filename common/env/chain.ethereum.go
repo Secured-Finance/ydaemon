@@ -146,7 +146,19 @@ var ETHEREUM = TChain{
 			Tag:     `V3 STAKING`,
 		},
 	},
-	ExtraVaults: []models.TVaultsFromRegistry{},
+	ExtraVaults: []models.TVaultsFromRegistry{
+		{
+			// JPYC
+			ChainID:         1,
+			Address:         common.HexToAddress(`0x70B314Ebbb2AacC8a9b1F7ebB730B0081999c54c`),
+			RegistryAddress: common.HexToAddress(`0x0000000000000000000000000000000000000000`),
+			TokenAddress:    common.HexToAddress(`0xE7C3D8C9a439feDe00D2600032D5dB0Be71C3c29`),
+			APIVersion:      `3.0.4`,
+			BlockNumber:     24065873,
+			Type:            models.TokenTypeStandardVault,
+			Kind:            models.VaultKindMultiple,
+		},
+	},
 	BlacklistedVaults: []common.Address{
 		common.HexToAddress("0xd1b0b6a1093a097227dc117c87ae3a72d9bd7cf2"), // uniETH pool
 		common.HexToAddress("0x662fBF2c1E4b04342EeBA6371ec1C7420042B86F"), // Test deployment - Nothing
@@ -180,28 +192,29 @@ var ETHEREUM = TChain{
 		// common.HexToAddress(`0x9d409a0A012CFbA9B15F6D4B36Ac57A46966Ab9a`), //DebtRatio 0 - To retire
 	},
 	ExtraTokens: []common.Address{
-		common.HexToAddress("0x34fe2a45D8df28459d7705F37eD13d7aE4382009"), // yvWBTC
-		common.HexToAddress("0xD533a949740bb3306d119CC777fa900bA034cd52"), // CRV - used by yBribe UI
-		common.HexToAddress("0x090185f2135308BaD17527004364eBcC2D37e5F6"), // Spell - used by yBribe UI
-		common.HexToAddress("0xCdF7028ceAB81fA0C6971208e83fa7872994beE5"), // TNT - used by yBribe UI
-		common.HexToAddress("0xba100000625a3754423978a60c9317c58a424e3D"), // BAL - used by yBAL UI
-		common.HexToAddress("0x5c6Ee304399DBdB9C8Ef030aB642B10820DB8F56"), // BALWETH - used by yBAL UI
-		common.HexToAddress(`0x30D20208d987713f46DFD34EF128Bb16C404D10f`), // Stader
-		common.HexToAddress(`0xa2E3356610840701BDf5611a53974510Ae27E2e1`), // wBETH
-		common.HexToAddress(`0xac3E018457B222d93114458476f3E3416Abbe38F`), // Staked Frax Ether
-		common.HexToAddress(`0xf951E335afb289353dc249e82926178EaC7DEd78`), // Swell Network Ether
-		common.HexToAddress(`0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0`), // Wrapped liquid staked Ether 2.0
-		common.HexToAddress(`0xA35b1B31Ce002FBF2058D22F30f95D405200A15b`), // Stader ETHx
-		common.HexToAddress(`0xBe9895146f7AF43049ca1c1AE358B0541Ea49704`), // Coinbase Wrapped Staked ETH
-		common.HexToAddress(`0x583019fF0f430721aDa9cfb4fac8F06cA104d0B4`), // st-yETH
-		common.HexToAddress(`0x41252E8691e964f7DE35156B68493bAb6797a275`), // dYFI
-		common.HexToAddress(`0xd084944d3c05cd115c09d072b9f44ba3e0e45921`), // Fold
-		common.HexToAddress(`0xdA47862a83dac0c112BA89c6abC2159b95afd71C`), // Prisma
-		common.HexToAddress(`0xe3668873d944e4a949da05fc8bde419eff543882`), // yPrisma
-		common.HexToAddress(`0x69833361991ed76f9e8DBBcdf9ea1520fEbFb4a7`), // lp-Prisma
-		common.HexToAddress(`0x9a96ec9B57Fb64FbC60B423d1f4da7691Bd35079`), // Ajna
-		common.HexToAddress(`0x9Ba021B0a9b958B5E75cE9f6dff97C7eE52cb3E6`), // apxETH
-		common.HexToAddress(`0x04C154b66CB340F3Ae24111CC767e0184Ed00Cc6`), // pxETH
+		// common.HexToAddress("0x34fe2a45D8df28459d7705F37eD13d7aE4382009"), // yvWBTC
+		// common.HexToAddress("0xD533a949740bb3306d119CC777fa900bA034cd52"), // CRV - used by yBribe UI
+		// common.HexToAddress("0x090185f2135308BaD17527004364eBcC2D37e5F6"), // Spell - used by yBribe UI
+		// common.HexToAddress("0xCdF7028ceAB81fA0C6971208e83fa7872994beE5"), // TNT - used by yBribe UI
+		// common.HexToAddress("0xba100000625a3754423978a60c9317c58a424e3D"), // BAL - used by yBAL UI
+		// common.HexToAddress("0x5c6Ee304399DBdB9C8Ef030aB642B10820DB8F56"), // BALWETH - used by yBAL UI
+		// common.HexToAddress(`0x30D20208d987713f46DFD34EF128Bb16C404D10f`), // Stader
+		// common.HexToAddress(`0xa2E3356610840701BDf5611a53974510Ae27E2e1`), // wBETH
+		// common.HexToAddress(`0xac3E018457B222d93114458476f3E3416Abbe38F`), // Staked Frax Ether
+		// common.HexToAddress(`0xf951E335afb289353dc249e82926178EaC7DEd78`), // Swell Network Ether
+		// common.HexToAddress(`0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0`), // Wrapped liquid staked Ether 2.0
+		// common.HexToAddress(`0xA35b1B31Ce002FBF2058D22F30f95D405200A15b`), // Stader ETHx
+		// common.HexToAddress(`0xBe9895146f7AF43049ca1c1AE358B0541Ea49704`), // Coinbase Wrapped Staked ETH
+		// common.HexToAddress(`0x583019fF0f430721aDa9cfb4fac8F06cA104d0B4`), // st-yETH
+		// common.HexToAddress(`0x41252E8691e964f7DE35156B68493bAb6797a275`), // dYFI
+		// common.HexToAddress(`0xd084944d3c05cd115c09d072b9f44ba3e0e45921`), // Fold
+		// common.HexToAddress(`0xdA47862a83dac0c112BA89c6abC2159b95afd71C`), // Prisma
+		// common.HexToAddress(`0xe3668873d944e4a949da05fc8bde419eff543882`), // yPrisma
+		// common.HexToAddress(`0x69833361991ed76f9e8DBBcdf9ea1520fEbFb4a7`), // lp-Prisma
+		// common.HexToAddress(`0x9a96ec9B57Fb64FbC60B423d1f4da7691Bd35079`), // Ajna
+		// common.HexToAddress(`0x9Ba021B0a9b958B5E75cE9f6dff97C7eE52cb3E6`), // apxETH
+		// common.HexToAddress(`0x04C154b66CB340F3Ae24111CC767e0184Ed00Cc6`), // pxETH
+		// common.HexToAddress(`0xE7C3D8C9a439feDe00D2600032D5dB0Be71C3c29`), // JPYC
 	},
 	IgnoredTokens: []common.Address{
 		common.HexToAddress(`0x7AB4a7BE740131BdE216521B54ADddD672F44A05`), // nothing

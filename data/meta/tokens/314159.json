@@ -1,5 +1,5 @@
 {
-	"lastUpdate": "2025-11-12T14:33:33.042207+09:00",
+	"lastUpdate": "2026-01-13T10:14:52.89976+09:00",
 	"version": {
 		"major": 0,
 		"minor": 1,
@@ -20,38 +20,6 @@
 			"description": "",
 			"category": "yVault",
 			"icon": "https://assets.smold.app/api/token/314159/0x641e8D9634a069d3FE32542207fFC233DF4eED19/logo-128.png",
-			"decimals": 18,
-			"chainID": 314159
-		},
-		"0x94862f5082c888bb2c54aae6a4c3aa01a3bc5585": {
-			"address": "0x94862f5082c888bb2c54aae6a4c3aa01a3bc5585",
-			"underlyingTokensAddresses": [
-				"0xb3042734b608a1b16e9e86b374a3f3e389b4cdf0"
-			],
-			"type": "Yearn Vault",
-			"name": "USDFC",
-			"symbol": "yvUSDFC",
-			"displayName": "USDFC",
-			"displaySymbol": "yvUSDFC",
-			"description": "",
-			"category": "yVault",
-			"icon": "https://assets.smold.app/api/token/314159/0x94862F5082C888Bb2c54aAe6a4c3aA01A3bC5585/logo-128.png",
-			"decimals": 18,
-			"chainID": 314159
-		},
-		"0xa06bb144e1801f232a0a902ec934343b0d6e4199": {
-			"address": "0xa06bb144e1801f232a0a902ec934343b0d6e4199",
-			"underlyingTokensAddresses": [
-				"0xb3042734b608a1b16e9e86b374a3f3e389b4cdf0"
-			],
-			"type": "Yearn Vault",
-			"name": "Secured Finance Staging-USDFC Lender",
-			"symbol": "ysUSDFC",
-			"displayName": "Secured Finance Staging-USDFC Lender",
-			"displaySymbol": "ysUSDFC",
-			"description": "",
-			"category": "yVault",
-			"icon": "https://assets.smold.app/api/token/314159/0xa06BB144E1801f232A0a902Ec934343B0D6E4199/logo-128.png",
 			"decimals": 18,
 			"chainID": 314159
 		},

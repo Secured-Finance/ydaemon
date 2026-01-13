@@ -144,30 +144,32 @@ func RetrieveAllVaults(
 	** From the vault registry we have the first batch of vaults. In order to proceed, we will
 	** create a map of TVault which will be stored in the DB. This action should only be performed
 	** for every refresh period, per vault per chainID.
+	**
+	** NOTE: Commented out to use only ExtraVaults instead of Kong database vaults
 	**********************************************************************************************/
-	for _, currentVault := range vaults {
-		if _, ok := vaultMap[currentVault.Address]; !ok || shouldRefresh {
-			if (currentVault.TokenAddress == common.Address{}) {
-				continue
-			}
-			isEndorsed := (currentVault.Type == models.TokenTypeStandardVault || currentVault.Type == models.TokenTypeAutomatedVault)
-			kind := currentVault.Kind
-			if currentVault.Kind == `` {
-				kind = models.VaultKindLegacy
-			}
-			newVault := models.TVault{
-				Address:      currentVault.Address,
-				AssetAddress: currentVault.TokenAddress,
-				Version:      currentVault.APIVersion,
-				ChainID:      chainID,
-				Endorsed:     isEndorsed,
-				Type:         currentVault.Type,
-				Kind:         kind,
-				Activation:   currentVault.BlockNumber,
-			}
-			updatedVaultMap[currentVault.Address] = newVault
-		}
-	}
+	// for _, currentVault := range vaults {
+	// 	if _, ok := vaultMap[currentVault.Address]; !ok || shouldRefresh {
+	// 		if (currentVault.TokenAddress == common.Address{}) {
+	// 			continue
+	// 		}
+	// 		isEndorsed := (currentVault.Type == models.TokenTypeStandardVault || currentVault.Type == models.TokenTypeAutomatedVault)
+	// 		kind := currentVault.Kind
+	// 		if currentVault.Kind == `` {
+	// 			kind = models.VaultKindLegacy
+	// 		}
+	// 		newVault := models.TVault{
+	// 			Address:      currentVault.Address,
+	// 			AssetAddress: currentVault.TokenAddress,
+	// 			Version:      currentVault.APIVersion,
+	// 			ChainID:      chainID,
+	// 			Endorsed:     isEndorsed,
+	// 			Type:         currentVault.Type,
+	// 			Kind:         kind,
+	// 			Activation:   currentVault.BlockNumber,
+	// 		}
+	// 		updatedVaultMap[currentVault.Address] = newVault
+	// 	}
+	// }
 
 	/**********************************************************************************************
 	** Somehow, some vaults are not in the registries, but we still need the vault data for them.
@@ -265,17 +267,6 @@ func RetrieveAllVaults(
 			vault.Metadata.Category = models.VaultCategoryAutomatic
 		}
 
-		/******************************************************************************************
-		** Special case: For Filecoin and Filecoin Calibration, vaults don't use registries
-		** so mark all vaults as Yearn by default if inclusion is not yet set
-		******************************************************************************************/
-		if !vault.Metadata.Inclusion.IsSet && (chainID == 314 || chainID == 314159) {
-			vault.Metadata.Inclusion.IsYearn = true
-			vault.Metadata.Inclusion.IsSet = true
-			vault.Endorsed = true
-			vault.Metadata.IsHidden = false
-		}
-
 		storage.StoreVault(chainID, vault)
 	}
 
@@ -313,11 +304,8 @@ func RetrieveAllVaults(
 			vault.Metadata.Inclusion.IsKatana = false //False by default
 			vault.Metadata.Inclusion.IsGimme = false  //False by default
 
-			// Special case: For Filecoin and Filecoin Calibration, vaults don't use registries
-			// so mark all vaults as Yearn by default
-			if chainID == 314 || chainID == 314159 {
-				vault.Metadata.Inclusion.IsYearn = true
-			}
+			// Set isYearn to true so that only ExtraVaults are targeted and all of them are displayed in the official UI
+			vault.Metadata.Inclusion.IsYearn = true
 
 			isYearn := vault.Metadata.Inclusion.IsYearn || vault.Metadata.Inclusion.IsYearnJuiced || vault.Metadata.Inclusion.IsGimme
 			isPublic := vault.Metadata.Inclusion.IsPublicERC4626

@@ -82,7 +82,7 @@ func init() {
 	godotenv.Load(`.env`)
 	// ETHEREUM.SubgraphURI = os.Getenv("SUBGRAPGH_FOR_1")
 	// ARBITRUM.SubgraphURI = os.Getenv("SUBGRAPGH_FOR_42161")
-	// CHAINS[1] = ETHEREUM
+	CHAINS[1] = ETHEREUM
 	// CHAINS[42161] = ARBITRUM
 	CHAINS[314159] = FILECOIN_CALIBRATION
 	SetEnv()
