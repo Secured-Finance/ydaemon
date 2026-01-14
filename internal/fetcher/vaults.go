@@ -125,8 +125,9 @@ func RetrieveAllVaults(
 		return nil
 	}
 	
-	vaultCount := len(vaults)
-	logs.Info(`Fetching details for ` + strconv.Itoa(vaultCount) + ` vaults on chain ` + strconv.FormatUint(chainID, 10))
+	// vaultCount := len(vaults)
+	// logs.Info(`Fetching details for ` + strconv.Itoa(vaultCount) + ` vaults on chain ` + strconv.FormatUint(chainID, 10))
+	logs.Info(`Fetching details for vaults on chain ` + strconv.FormatUint(chainID, 10))
 
 	/**********************************************************************************************
 	** First, try to retrieve the list of vaults from the database and populate our updatedVaultMap

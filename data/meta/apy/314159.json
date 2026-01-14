@@ -1,9 +1,9 @@
 {
-	"lastUpdate": "2026-01-13T10:14:56.786936+09:00",
+	"lastUpdate": "2026-01-14T22:31:08.462406+09:00",
 	"version": {
 		"major": 0,
 		"minor": 1,
-		"patch": 3
+		"patch": 1
 	},
 	"shouldRefresh": false,
 	"apy": {
@@ -17,7 +17,7 @@
 			"points": {
 				"weekAgo": 0,
 				"monthAgo": 0,
-				"inception": 0.46602415601312014
+				"inception": 0.4564154105283135
 			},
 			"pricePerShare": {
 				"today": 1.1212939584143737,

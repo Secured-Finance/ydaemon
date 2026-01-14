@@ -116,7 +116,7 @@ func (c *Client) executeQuery(ctx context.Context, query string, variables map[s
 func (c *Client) FetchVaultsForChain(ctx context.Context, chainID uint64) ([]KongVault, error) {
 	query := `
 		query FetchVaults($chainId: Int!) {
-			vaults(chainId: $chainId, yearn: true) {
+			vaults(chainId: $chainId) {
 				address
 				chainId
 				asset {

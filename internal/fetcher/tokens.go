@@ -662,53 +662,53 @@ func RetrieveAllTokens(
 	/**********************************************************************************************
 	** Fetch the tokens from the Velodrome API.
 	**********************************************************************************************/
-	veloTokens := loadVeloTokens(chainID)
-	for _, veloToken := range veloTokens {
-		if _, ok := tokenMap[veloToken]; !ok || shouldRefresh {
-			updatedTokenMap[veloToken] = models.TERC20Token{
-				Address: veloToken,
-				ChainID: chainID,
-			}
-		}
-	}
+	// veloTokens := loadVeloTokens(chainID)
+	// for _, veloToken := range veloTokens {
+	// 	if _, ok := tokenMap[veloToken]; !ok || shouldRefresh {
+	// 		updatedTokenMap[veloToken] = models.TERC20Token{
+	// 			Address: veloToken,
+	// 			ChainID: chainID,
+	// 		}
+	// 	}
+	// }
 
 	/**********************************************************************************************
 	** Fetch the tokens from the Curve Factory.
 	**********************************************************************************************/
 	curveFactoryPools := loadCurvePools(chainID)
-	for _, poolCoins := range curveFactoryPools {
-		for _, coinAddress := range poolCoins {
-			if _, ok := tokenMap[coinAddress]; !ok || shouldRefresh {
-				updatedTokenMap[coinAddress] = models.TERC20Token{
-					Address: coinAddress,
-					ChainID: chainID,
-				}
-			}
-		}
-	}
+	// for _, poolCoins := range curveFactoryPools {
+	// 	for _, coinAddress := range poolCoins {
+	// 		if _, ok := tokenMap[coinAddress]; !ok || shouldRefresh {
+	// 			updatedTokenMap[coinAddress] = models.TERC20Token{
+	// 				Address: coinAddress,
+	// 				ChainID: chainID,
+	// 			}
+	// 		}
+	// 	}
+	// }
 
 	/**********************************************************************************************
 	** Fetch the tokens from the Gamma API.
 	**********************************************************************************************/
-	gammaPools := loadGammaPools(chainID)
-	for _, token := range gammaPools {
-		if _, ok := tokenMap[token.Address]; !ok || shouldRefresh {
-			updatedTokenMap[token.Address] = token
-		}
-	}
+	// gammaPools := loadGammaPools(chainID)
+	// for _, token := range gammaPools {
+	// 	if _, ok := tokenMap[token.Address]; !ok || shouldRefresh {
+	// 		updatedTokenMap[token.Address] = token
+	// 	}
+	// }
 
 	/**********************************************************************************************
 	** Fetch the tokens from the Pendle V1 API.
 	**********************************************************************************************/
-	pendleTokens := loadPendleTokens(chainID)
-	for _, token := range pendleTokens {
-		if _, ok := tokenMap[token]; !ok || shouldRefresh {
-			updatedTokenMap[token] = models.TERC20Token{
-				Address: token,
-				ChainID: chainID,
-			}
-		}
-	}
+	// pendleTokens := loadPendleTokens(chainID)
+	// for _, token := range pendleTokens {
+	// 	if _, ok := tokenMap[token]; !ok || shouldRefresh {
+	// 		updatedTokenMap[token] = models.TERC20Token{
+	// 			Address: token,
+	// 			ChainID: chainID,
+	// 		}
+	// 	}
+	// }
 
 	/**********************************************************************************************
 	** Once we got out basic list, we will fetch theses basics informations. This includes:

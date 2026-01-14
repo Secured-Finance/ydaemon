@@ -48,7 +48,7 @@ var FILECOIN_CALIBRATION = TChain{
 		},
 	},
 	APROracleContract:     TContractData{Address: common.Address{}, Block: 0},
-	ExtraVaults:       []models.TVaultsFromRegistry{
+	ExtraVaults: []models.TVaultsFromRegistry{
 		{
 			// USDFC
 			ChainID:         314159,

@@ -1,65 +1,10 @@
 {
-	"lastUpdate": "2026-01-13T10:15:13.751875+09:00",
+	"lastUpdate": "2026-01-14T22:31:27.744433+09:00",
 	"version": {
 		"major": 0,
-		"minor": 1,
-		"patch": 7
+		"minor": 0,
+		"patch": 0
 	},
 	"shouldRefresh": false,
-	"strategies": {
-		"0xBaadd4b44929606178FcDBd2f4309282f39D9dA7_0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F": {
-			"address": "0xbaadd4b44929606178fcdbd2f4309282f39d9da7",
-			"vaultAddress": "0xbf319ddc2edc1eb6fdf9910e39b37be221c8805f",
-			"name": "Convex crvUSD-sreUSD Lender",
-			"vaultVersion": "3.0.2",
-			"displayName": "",
-			"description": "",
-			"activation": 23392354,
-			"chainID": 1,
-			"doHealthCheck": true,
-			"isActive": true,
-			"isInQueue": false,
-			"isRetired": false,
-			"status": "active",
-			"keepCRV": null,
-			"keepCRVPercent": null,
-			"keepCVX": null,
-			"lastTotalDebt": "293438835517089465378725",
-			"lastTotalLoss": "0",
-			"lastTotalGain": "0",
-			"lastPerformanceFee": "500",
-			"lastReport": "1758227339",
-			"lastDebtRatio": "978",
-			"netAPR": 0.1586453989870673,
-			"aprType": "forward",
-			"protocols": null
-		},
-		"0xa1925F870A665BD35372f63694179578AfD73f79_0x70B314Ebbb2AacC8a9b1F7ebB730B0081999c54c": {
-			"address": "0xa1925f870a665bd35372f63694179578afd73f79",
-			"vaultAddress": "0x70b314ebbb2aacc8a9b1f7ebb730b0081999c54c",
-			"name": "Secured Finance JPYC Lender",
-			"vaultVersion": "3.0.4",
-			"displayName": "",
-			"description": "",
-			"activation": 24065873,
-			"chainID": 1,
-			"doHealthCheck": false,
-			"isActive": true,
-			"isInQueue": true,
-			"isRetired": false,
-			"status": "unallocated",
-			"keepCRV": null,
-			"keepCRVPercent": null,
-			"keepCVX": null,
-			"lastTotalDebt": "0",
-			"lastTotalLoss": "0",
-			"lastTotalGain": "0",
-			"lastPerformanceFee": "1000",
-			"lastReport": "1766379095",
-			"lastDebtRatio": "0",
-			"netAPR": 0,
-			"aprType": "forward",
-			"protocols": null
-		}
-	}
+	"strategies": {}
 }
