@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - feature/**  # testing purposes
+      - develop
   workflow_dispatch:
     inputs:
       network:
