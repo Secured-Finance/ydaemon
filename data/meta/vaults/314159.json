@@ -1,5 +1,5 @@
 {
-	"lastUpdate": "2026-01-14T22:31:09.753977+09:00",
+	"lastUpdate": "2026-01-14T22:31:05.974041+09:00",
 	"version": {
 		"major": 0,
 		"minor": 1,
@@ -7,15 +7,15 @@
 	},
 	"shouldRefresh": false,
 	"vaults": {
-		"0x70b314ebbb2aacc8a9b1f7ebb730b0081999c54c": {
-			"address": "0x70b314ebbb2aacc8a9b1f7ebb730b0081999c54c",
-			"token": "0xe7c3d8c9a439fede00d2600032d5db0be71c3c29",
+		"0x641e8d9634a069d3fe32542207ffc233df4eed19": {
+			"address": "0x641e8d9634a069d3fe32542207ffc233df4eed19",
+			"token": "0xb3042734b608a1b16e9e86b374a3f3e389b4cdf0",
 			"registry": "0x0000000000000000000000000000000000000000",
 			"type": "Yearn Vault",
 			"kind": "Multi Strategy",
 			"version": "3.0.4",
-			"activation": 24065873,
-			"chainID": 1,
+			"activation": 3088760,
+			"chainID": 314159,
 			"endorsed": true,
 			"performanceFee": 0,
 			"managementFee": 0,

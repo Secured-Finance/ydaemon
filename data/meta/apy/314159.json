@@ -1,5 +1,5 @@
 {
-	"lastUpdate": "2026-01-14T22:31:35.845186+09:00",
+	"lastUpdate": "2026-01-14T22:31:08.462406+09:00",
 	"version": {
 		"major": 0,
 		"minor": 1,
@@ -7,7 +7,7 @@
 	},
 	"shouldRefresh": false,
 	"apy": {
-		"0x70b314ebbb2aacc8a9b1f7ebb730b0081999c54c": {
+		"0x641e8d9634a069d3fe32542207ffc233df4eed19": {
 			"type": "v3:averaged",
 			"netAPY": 0,
 			"fees": {
@@ -17,29 +17,27 @@
 			"points": {
 				"weekAgo": 0,
 				"monthAgo": 0,
-				"inception": 0
+				"inception": 0.4564154105283135
 			},
 			"pricePerShare": {
-				"today": 1,
-				"weekAgo": 1,
-				"monthAgo": 1
+				"today": 1.1212939584143737,
+				"weekAgo": 1.1212939584143737,
+				"monthAgo": 1.1212939584143737
 			},
 			"extra": {
 				"stakingRewardsAPY": null,
 				"gammaRewardAPY": null
 			},
 			"forwardAPY": {
-				"type": "v3:onchainOracle",
-				"netAPY": 0,
+				"type": "",
+				"netAPY": null,
 				"composite": {
 					"boost": null,
 					"poolAPY": null,
 					"boostedAPR": null,
 					"baseAPR": null,
 					"cvxAPR": null,
-					"rewardsAPY": null,
-					"v3OracleCurrentAPR": 0,
-					"v3OracleStratRatioAPR": 0
+					"rewardsAPY": null
 				}
 			}
 		}

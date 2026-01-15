@@ -104,10 +104,13 @@ func SafeUint64ToInt64(value uint64) (int64, bool) {
 ** @param chainID The chain ID to initialize block timestamps for
 **************************************************************************************************/
 func InitBlockTimestamp(chainID uint64) {
+	type TScanResultObject struct {
+		BlockNumber string `json:"blockNumber"`
+	}
 	type TScanResult struct {
-		Status  string `json:"status"`
-		Message string `json:"message"`
-		Result  string `json:"result"`
+		Status  string          `json:"status"`
+		Message string          `json:"message"`
+		Result  json.RawMessage `json:"result"`
 	}
 	var err error
 	now := time.Now()
@@ -121,6 +124,27 @@ func InitBlockTimestamp(chainID uint64) {
 		return
 	}
 
+	// Helper function to parse block number from result (handles both string and object format)
+	parseBlockNumber := func(result TScanResult) (uint64, error) {
+		if result.Status != "1" {
+			return 0, fmt.Errorf("API returned status: %s", result.Status)
+		}
+
+		// Try to parse as string first (Etherscan format)
+		var blockStr string
+		if err := json.Unmarshal(result.Result, &blockStr); err == nil {
+			return strconv.ParseUint(blockStr, 10, 64)
+		}
+
+		// Try to parse as object (Blockscout format)
+		var blockObj TScanResultObject
+		if err := json.Unmarshal(result.Result, &blockObj); err == nil {
+			return strconv.ParseUint(blockObj.BlockNumber, 10, 64)
+		}
+
+		return 0, fmt.Errorf("unable to parse result format")
+	}
+
 	APIKey := os.Getenv("SCAN_API_KEY")
 	lastWeekBlock := helpers.FetchJSON[TScanResult](chain.EtherscanURI + `?chainid=` + strconv.FormatUint(chainID, 10) + `&module=block&action=getblocknobytime&timestamp=` + strconv.FormatInt(lastWeekTimestamp, 10) + `&closest=before&apikey=` + APIKey)
 	lastTwoWeekBlock := helpers.FetchJSON[TScanResult](chain.EtherscanURI + `?chainid=` + strconv.FormatUint(chainID, 10) + `&module=block&action=getblocknobytime&timestamp=` + strconv.FormatInt(lastTwoWeekTimestamp, 10) + `&closest=before&apikey=` + APIKey)
@@ -132,30 +156,19 @@ func InitBlockTimestamp(chainID uint64) {
 	if blockTimeMap[chainID] == nil {
 		blockTimeMap[chainID] = make(map[uint64]uint64)
 	}
-	if lastWeekBlock.Status == "1" {
-		blockTimeMap[chainID][7], err = strconv.ParseUint(lastWeekBlock.Result, 10, 64)
-		if err != nil {
-			blockTimeMap[chainID][7] = uint64(chain.AvgBlocksPerDay * 7)
-		}
-	} else {
+
+	blockTimeMap[chainID][7], err = parseBlockNumber(lastWeekBlock)
+	if err != nil {
 		blockTimeMap[chainID][7] = uint64(chain.AvgBlocksPerDay * 7)
 	}
 
-	if lastTwoWeekBlock.Status == "1" {
-		blockTimeMap[chainID][14], err = strconv.ParseUint(lastTwoWeekBlock.Result, 10, 64)
-		if err != nil {
-			blockTimeMap[chainID][14] = uint64(chain.AvgBlocksPerDay * 14)
-		}
-	} else {
+	blockTimeMap[chainID][14], err = parseBlockNumber(lastTwoWeekBlock)
+	if err != nil {
 		blockTimeMap[chainID][14] = uint64(chain.AvgBlocksPerDay * 14)
 	}
 
-	if lastMonthBlock.Status == "1" {
-		blockTimeMap[chainID][30], err = strconv.ParseUint(lastMonthBlock.Result, 10, 64)
-		if err != nil {
-			blockTimeMap[chainID][30] = uint64(chain.AvgBlocksPerDay * 30)
-		}
-	} else {
+	blockTimeMap[chainID][30], err = parseBlockNumber(lastMonthBlock)
+	if err != nil {
 		blockTimeMap[chainID][30] = uint64(chain.AvgBlocksPerDay * 30)
 	}
 }
@@ -558,10 +571,34 @@ func fetchBlocktimeForDateRange(chainID uint64, startDate, endDate *time.Time) {
 ** @return error An error if fetching fails
 **************************************************************************************************/
 func fetchBlockNumberFromAPI(chain env.TChain, timestamp uint64, apiKey string) (uint64, error) {
+	type TScanResultObject struct {
+		BlockNumber string `json:"blockNumber"`
+	}
 	type TScanResult struct {
-		Status  string `json:"status"`
-		Message string `json:"message"`
-		Result  string `json:"result"`
+		Status  string          `json:"status"`
+		Message string          `json:"message"`
+		Result  json.RawMessage `json:"result"`
+	}
+
+	// Helper function to parse block number from result (handles both string and object format)
+	parseBlockNumber := func(result TScanResult) (uint64, error) {
+		if result.Status != "1" {
+			return 0, fmt.Errorf("API returned status: %s, message: %s", result.Status, result.Message)
+		}
+
+		// Try to parse as string first (Etherscan format)
+		var blockStr string
+		if err := json.Unmarshal(result.Result, &blockStr); err == nil {
+			return strconv.ParseUint(blockStr, 10, 64)
+		}
+
+		// Try to parse as object (Blockscout format)
+		var blockObj TScanResultObject
+		if err := json.Unmarshal(result.Result, &blockObj); err == nil {
+			return strconv.ParseUint(blockObj.BlockNumber, 10, 64)
+		}
+
+		return 0, fmt.Errorf("unable to parse result format")
 	}
 
 	// Convert timestamp to date string for logging
@@ -614,19 +651,14 @@ func fetchBlockNumberFromAPI(chain env.TChain, timestamp uint64, apiKey string) 
 			chain.ID, chain.EtherscanURI))
 
 		result := helpers.FetchJSON[TScanResult](apiURL)
-		if result.Status == "1" {
-			blockNumber, err := strconv.ParseUint(result.Result, 10, 64)
-			if err == nil {
-				blocktimeSuccess(fmt.Sprintf("Chain %d - Etherscan API success: block %d at %s",
-					chain.ID, blockNumber, dateStr))
-				return blockNumber, nil
-			}
-			blocktimeWarning(fmt.Sprintf("Chain %d - Failed to parse block number from Etherscan: %v", chain.ID, err))
-			return 0, err
+		blockNumber, err := parseBlockNumber(result)
+		if err == nil {
+			blocktimeSuccess(fmt.Sprintf("Chain %d - Etherscan API success: block %d at %s",
+				chain.ID, blockNumber, dateStr))
+			return blockNumber, nil
 		}
-		blocktimeWarning(fmt.Sprintf("Chain %d - Etherscan API error: status=%s, message=%s",
-			chain.ID, result.Status, result.Message))
-		return 0, fmt.Errorf("API returned status: %s, message: %s", result.Status, result.Message)
+		blocktimeWarning(fmt.Sprintf("Chain %d - Etherscan API error: %v", chain.ID, err))
+		return 0, err
 	}
 
 	// Last resort: estimate based on average blocks per day
