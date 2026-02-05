@@ -37,13 +37,6 @@ var ETHEREUM = TChain{
 		Address: common.HexToAddress(`0x1981AD9F44F2EA9aDd2dC4AD7D075c102C70aF92`),
 		Block:   19070394,
 	},
-	ExtraStakingContracts: []TExtraStakingContracts{
-		{
-			VaultAddress:   common.HexToAddress(`0xe24BA27551aBE96Ca401D39761cA2319Ea14e3CB`),
-			StakingAddress: common.HexToAddress(`0x54C6b2b293297e65b1d163C3E8dbc45338bfE443`),
-			Tag:            `JUICED`,
-		},
-	},
 	Coin: models.TERC20Token{
 		Address:                   DEFAULT_COIN_ADDRESS,
 		UnderlyingTokensAddresses: []common.Address{},
@@ -150,11 +143,11 @@ var ETHEREUM = TChain{
 		{
 			// JPYC
 			ChainID:         1,
-			Address:         common.HexToAddress(`0x70B314Ebbb2AacC8a9b1F7ebB730B0081999c54c`),
+			Address:         common.HexToAddress(`0x7a6E3635694952dC00F6bA4d4AD1a7B892028789`),
 			RegistryAddress: common.HexToAddress(`0x0000000000000000000000000000000000000000`),
 			TokenAddress:    common.HexToAddress(`0xE7C3D8C9a439feDe00D2600032D5dB0Be71C3c29`),
 			APIVersion:      `3.0.4`,
-			BlockNumber:     24065873,
+			BlockNumber:     24387790,
 			Type:            models.TokenTypeStandardVault,
 			Kind:            models.VaultKindMultiple,
 		},

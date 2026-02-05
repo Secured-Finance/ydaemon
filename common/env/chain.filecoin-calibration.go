@@ -52,11 +52,11 @@ var FILECOIN_CALIBRATION = TChain{
 		{
 			// USDFC
 			ChainID:         314159,
-			Address:         common.HexToAddress(`0x641e8d9634a069d3fe32542207ffc233df4eed19`),
+			Address:         common.HexToAddress(`0x06D7FCd55aE83AB2Ee0C0283CC9DfD710312ffee`),
 			RegistryAddress: common.HexToAddress(`0x0000000000000000000000000000000000000000`),
 			TokenAddress:    common.HexToAddress(`0xb3042734b608a1b16e9e86b374a3f3e389b4cdf0`),
 			APIVersion:      `3.0.4`,
-			BlockNumber:     3088760,
+			BlockNumber:     3423687,
 			Type:            models.TokenTypeStandardVault,
 			Kind:            models.VaultKindMultiple,
 		},

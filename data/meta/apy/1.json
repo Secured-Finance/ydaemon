@@ -1,13 +1,13 @@
 {
-	"lastUpdate": "2026-01-14T22:31:35.845186+09:00",
+	"lastUpdate": "2026-02-05T13:06:29.427269+09:00",
 	"version": {
 		"major": 0,
 		"minor": 1,
-		"patch": 1
+		"patch": 2
 	},
 	"shouldRefresh": false,
 	"apy": {
-		"0x70b314ebbb2aacc8a9b1f7ebb730b0081999c54c": {
+		"0x7a6e3635694952dc00f6ba4d4ad1a7b892028789": {
 			"type": "v3:averaged",
 			"netAPY": 0,
 			"fees": {
@@ -20,9 +20,9 @@
 				"inception": 0
 			},
 			"pricePerShare": {
-				"today": 1,
-				"weekAgo": 1,
-				"monthAgo": 1
+				"today": 0,
+				"weekAgo": 0,
+				"monthAgo": 0
 			},
 			"extra": {
 				"stakingRewardsAPY": null,

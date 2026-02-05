@@ -1,10 +1,38 @@
 {
-	"lastUpdate": "2026-01-14T22:31:27.744433+09:00",
+	"lastUpdate": "2026-02-05T13:06:21.235656+09:00",
 	"version": {
 		"major": 0,
-		"minor": 0,
-		"patch": 0
+		"minor": 1,
+		"patch": 5
 	},
 	"shouldRefresh": false,
-	"strategies": {}
+	"strategies": {
+		"0x6F6046e59501E484152d46045bA5eECf1Cab8935_0x7a6E3635694952dC00F6bA4d4AD1a7B892028789": {
+			"address": "0x6f6046e59501e484152d46045ba5eecf1cab8935",
+			"vaultAddress": "0x7a6e3635694952dc00f6ba4d4ad1a7b892028789",
+			"name": "Secured Finance JPYC Lender",
+			"vaultVersion": "3.0.4",
+			"displayName": "",
+			"description": "",
+			"activation": 24387790,
+			"chainID": 1,
+			"doHealthCheck": false,
+			"isActive": true,
+			"isInQueue": true,
+			"isRetired": false,
+			"status": "unallocated",
+			"keepCRV": null,
+			"keepCRVPercent": null,
+			"keepCVX": null,
+			"lastTotalDebt": "0",
+			"lastTotalLoss": "0",
+			"lastTotalGain": "0",
+			"lastPerformanceFee": "1000",
+			"lastReport": "1770260555",
+			"lastDebtRatio": "0",
+			"netAPR": 0,
+			"aprType": "forward",
+			"protocols": null
+		}
+	}
 }

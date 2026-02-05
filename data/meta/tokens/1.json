@@ -1,5 +1,5 @@
 {
-	"lastUpdate": "2026-01-14T22:31:11.169184+09:00",
+	"lastUpdate": "2026-02-05T13:06:17.416789+09:00",
 	"version": {
 		"major": 0,
 		"minor": 1,
@@ -7,8 +7,8 @@
 	},
 	"shouldRefresh": false,
 	"tokens": {
-		"0x70b314ebbb2aacc8a9b1f7ebb730b0081999c54c": {
-			"address": "0x70b314ebbb2aacc8a9b1f7ebb730b0081999c54c",
+		"0x7a6e3635694952dc00f6ba4d4ad1a7b892028789": {
+			"address": "0x7a6e3635694952dc00f6ba4d4ad1a7b892028789",
 			"underlyingTokensAddresses": [
 				"0xe7c3d8c9a439fede00d2600032d5db0be71c3c29"
 			],
@@ -19,7 +19,7 @@
 			"displaySymbol": "yvJPYC",
 			"description": "",
 			"category": "yVault",
-			"icon": "https://assets.smold.app/api/token/1/0x70B314Ebbb2AacC8a9b1F7ebB730B0081999c54c/logo-128.png",
+			"icon": "https://assets.smold.app/api/token/1/0x7a6E3635694952dC00F6bA4d4AD1a7B892028789/logo-128.png",
 			"decimals": 18,
 			"chainID": 1
 		},

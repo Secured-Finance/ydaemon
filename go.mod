@@ -1,6 +1,6 @@
 module github.com/yearn/ydaemon
 
-go 1.21
+go 1.21.0
 
 toolchain go1.24.1
 
