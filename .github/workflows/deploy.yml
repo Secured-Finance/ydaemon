@@ -1,127 +1,122 @@
 name: Deploy ydaemon to Cloud Run
 
 on:
-  push:
-    branches:
-      - main
-      - develop
-  workflow_dispatch:
-    inputs:
-      network:
-        description: 'Environment to deploy'
-        required: true
-        default: 'development'
-        type: choice
-        options:
-          - development
-          - production
+    push:
+        branches:
+            - main
+            - develop
+    workflow_dispatch:
+        inputs:
+            network:
+                description: 'Environment to deploy'
+                required: true
+                default: 'development'
+                type: choice
+                options:
+                    - development
+                    - production
 
 env:
-  PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
-  REGION: ${{ vars.GCP_REGION }}
-  AR_REPOSITORY: ${{ vars.AR_REPOSITORY }}
-  JOB_NAME: ${{ vars.GCP_JOB_NAME}}
-  BUCKET_NAME: ${{ vars.GCP_PROJECT_ID }}-${{ vars.GCP_JOB_NAME }}-data
-  MAX_INSTANCES: ${{ vars.GCP_MAX_INSTANCES }}
-  SUPPORTED_CHAIN_IDS: ${{ vars.SUPPORTED_CHAIN_IDS }}
-  KONG_API_URL: ${{ vars.KONG_API_URL }}
-  KONG_POSTGRES_DSN: ${{ secrets.KONG_POSTGRES_DSN }}
-  RPC_URI_FOR_1: ${{ secrets.RPC_URI_FOR_1 }}
-  RPC_URI_FOR_314159: ${{ secrets.RPC_URI_FOR_314159 }}
-  RPC_AUTH_TOKEN_FOR_314159: ${{ secrets.RPC_AUTH_TOKEN_FOR_314159 }}
+    PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+    REGION: ${{ vars.GCP_REGION }}
+    AR_REPOSITORY: ${{ vars.AR_REPOSITORY }}
+    JOB_NAME: ${{ vars.GCP_JOB_NAME}}
+    BUCKET_NAME: ${{ vars.GCP_PROJECT_ID }}-${{ vars.GCP_JOB_NAME }}-data
+    MAX_INSTANCES: ${{ vars.GCP_MAX_INSTANCES }}
+    SUPPORTED_CHAIN_IDS: ${{ vars.SUPPORTED_CHAIN_IDS }}
+    KONG_API_URL: ${{ vars.KONG_API_URL }}
+    KONG_POSTGRES_DSN: ${{ secrets.KONG_POSTGRES_DSN }}
+    RPC_URI_FOR_1: ${{ secrets.RPC_URI_FOR_1 }}
+    RPC_URI_FOR_314159: ${{ secrets.RPC_URI_FOR_314159 }}
+    RPC_AUTH_TOKEN_FOR_314159: ${{ secrets.RPC_AUTH_TOKEN_FOR_314159 }}
 
 jobs:
-  identify-env:
-    if: github.event_name != 'workflow_dispatch'
-    name: Identify the environment
-    uses: ./.github/workflows/identify-env.yml
-    with:
-      branch_name: ${{ github.ref }}
-
-  build-and-deploy:
-    permissions:
-      contents: read
-      id-token: 'write'   # for WIF authentication
-    runs-on: ubuntu-latest
-    if: ${{ always() }}
-    needs: [identify-env]
-    environment: ${{ github.event.inputs.network || needs.identify-env.outputs.environment_name }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Auth to Google Cloud (WIF)
-        uses: google-github-actions/auth@v2
+    identify-env:
+        if: github.event_name != 'workflow_dispatch'
+        name: Identify the environment
+        uses: ./.github/workflows/identify-env.yml
         with:
-          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
-          service_account: ${{ vars.WIF_SERVICE_ACCOUNT }}
-          token_format: 'access_token'
+            branch_name: ${{ github.ref }}
 
-      - name: Set up gcloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-        with:
-          project_id: ${{ env.PROJECT_ID }}
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        if: ${{ always() }}
+        needs: [identify-env]
+        environment: ${{ github.event.inputs.network || needs.identify-env.outputs.environment_name }}
 
-      - name: Configure Docker for Artifact Registry
-        run: |
-          gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
 
-      - name: Set image tag
-        id: vars
-        run: |
-          IMAGE_URI="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.AR_REPOSITORY }}/${{ env.JOB_NAME }}"
-          echo "image_uri=$IMAGE_URI" >> $GITHUB_OUTPUT
-          echo "image_tag=${{ github.sha }}" >> $GITHUB_OUTPUT
+            - name: Authenticate to Google Cloud
+              uses: google-github-actions/auth@v2
+              with:
+                  credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      - name: Build Docker image
-        run: |
-          docker build -t ${{ steps.vars.outputs.image_uri }}:${{ steps.vars.outputs.image_tag }} .
-          docker tag  ${{ steps.vars.outputs.image_uri }}:${{ steps.vars.outputs.image_tag }} \
-                      ${{ steps.vars.outputs.image_uri }}:latest
+            - name: Set up gcloud SDK
+              uses: google-github-actions/setup-gcloud@v2
+              with:
+                  project_id: ${{ env.PROJECT_ID }}
 
-      - name: Push Docker image
-        run: |
-          docker push ${{ steps.vars.outputs.image_uri }}:${{ steps.vars.outputs.image_tag }}
-          docker push ${{ steps.vars.outputs.image_uri }}:latest
+            - name: Configure Docker for Artifact Registry
+              run: |
+                  gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
 
-      - name: Ensure GCS Bucket exists
-        run: |
-          if ! gsutil ls -b gs://${{env.BUCKET_NAME}} > /dev/null 2>&1; then
-            echo "Creating bucket: ${{env.BUCKET_NAME}}"
-            gsutil mb -p ${{ env.PROJECT_ID }} -l ${{ env.REGION }} gs://${{env.BUCKET_NAME}}
-            echo "Bucket created successfully"
-          else
-            echo "Bucket already exists: ${{env.BUCKET_NAME}}"
-          fi
+            - name: Set image tag
+              id: vars
+              run: |
+                  IMAGE_URI="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.AR_REPOSITORY }}/${{ env.JOB_NAME }}"
+                  echo "image_uri=$IMAGE_URI" >> $GITHUB_OUTPUT
+                  echo "image_tag=${{ github.sha }}" >> $GITHUB_OUTPUT
 
-      - name: Sync data files to GCS Bucket
-        run: |
-          echo "Syncing data files to GCS bucket..."
-          for dir in ./data/*/; do
-            if [ -d "$dir" ] && [ ! -L "$dir" ]; then
-              dirname=$(basename "$dir")
-              echo "Syncing $dirname..."
-              gsutil -m rsync -r -d "$dir" gs://${{env.BUCKET_NAME}}/$dirname/
-            fi
-          done
-          echo "Data files synced successfully"
+            - name: Build Docker image
+              run: |
+                  docker build -t ${{ steps.vars.outputs.image_uri }}:${{ steps.vars.outputs.image_tag }} .
+                  docker tag  ${{ steps.vars.outputs.image_uri }}:${{ steps.vars.outputs.image_tag }} \
+                              ${{ steps.vars.outputs.image_uri }}:latest
 
-      - name: Deploy to Cloud Run
-        run: |
-          gcloud run deploy ${{ env.JOB_NAME }} \
-            --image=${{ steps.vars.outputs.image_uri }}:${{ steps.vars.outputs.image_tag }} \
-            --region=${{ env.REGION }} \
-            --platform=managed \
-            --allow-unauthenticated \
-            --port=8080 \
-            --min-instances=1 \
-            --max-instances=${MAX_INSTANCES} \
-            --no-cpu-throttling \
-            --set-env-vars=SUPPORTED_CHAIN_IDS=${SUPPORTED_CHAIN_IDS} \
-            --set-env-vars=KONG_API_URL=${KONG_API_URL},KONG_POSTGRES_DSN=${KONG_POSTGRES_DSN} \
-            --set-env-vars=RPC_URI_FOR_1=${RPC_URI_FOR_1} \
-            --set-env-vars=RPC_URI_FOR_314159=${RPC_URI_FOR_314159},RPC_AUTH_TOKEN_FOR_314159=${RPC_AUTH_TOKEN_FOR_314159} \
-            --execution-environment=gen2 \
-            --add-volume=name=data-volume,type=cloud-storage,bucket=${{env.BUCKET_NAME}} \
-            --add-volume-mount=volume=data-volume,mount-path=/app/data
+            - name: Push Docker image
+              run: |
+                  docker push ${{ steps.vars.outputs.image_uri }}:${{ steps.vars.outputs.image_tag }}
+                  docker push ${{ steps.vars.outputs.image_uri }}:latest
+
+            - name: Ensure GCS Bucket exists
+              run: |
+                  if ! gsutil ls -b gs://${{env.BUCKET_NAME}} > /dev/null 2>&1; then
+                    echo "Creating bucket: ${{env.BUCKET_NAME}}"
+                    gsutil mb -p ${{ env.PROJECT_ID }} -l ${{ env.REGION }} gs://${{env.BUCKET_NAME}}
+                    echo "Bucket created successfully"
+                  else
+                    echo "Bucket already exists: ${{env.BUCKET_NAME}}"
+                  fi
+
+            - name: Sync data files to GCS Bucket
+              run: |
+                  echo "Syncing data files to GCS bucket..."
+                  for dir in ./data/*/; do
+                    if [ -d "$dir" ] && [ ! -L "$dir" ]; then
+                      dirname=$(basename "$dir")
+                      echo "Syncing $dirname..."
+                      gsutil -m rsync -r -d "$dir" gs://${{env.BUCKET_NAME}}/$dirname/
+                    fi
+                  done
+                  echo "Data files synced successfully"
+
+            - name: Deploy to Cloud Run
+              run: |
+                  gcloud run deploy ${{ env.JOB_NAME }} \
+                    --image=${{ steps.vars.outputs.image_uri }}:${{ steps.vars.outputs.image_tag }} \
+                    --region=${{ env.REGION }} \
+                    --platform=managed \
+                    --allow-unauthenticated \
+                    --port=8080 \
+                    --min-instances=1 \
+                    --max-instances=${MAX_INSTANCES} \
+                    --no-cpu-throttling \
+                    --set-env-vars=SUPPORTED_CHAIN_IDS=${SUPPORTED_CHAIN_IDS} \
+                    --set-env-vars=KONG_API_URL=${KONG_API_URL},KONG_POSTGRES_DSN=${KONG_POSTGRES_DSN} \
+                    --set-env-vars=RPC_URI_FOR_1=${RPC_URI_FOR_1} \
+                    --set-env-vars=RPC_URI_FOR_314159=${RPC_URI_FOR_314159},RPC_AUTH_TOKEN_FOR_314159=${RPC_AUTH_TOKEN_FOR_314159} \
+                    --execution-environment=gen2 \
+                    --add-volume=name=data-volume,type=cloud-storage,bucket=${{env.BUCKET_NAME}} \
+                    --add-volume-mount=volume=data-volume,mount-path=/app/data
