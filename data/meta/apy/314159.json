@@ -1,14 +1,14 @@
 {
-	"lastUpdate": "2026-02-05T13:06:14.0311+09:00",
+	"lastUpdate": "2026-04-23T11:43:59.279826+09:00",
 	"version": {
 		"major": 0,
 		"minor": 1,
-		"patch": 2
+		"patch": 4
 	},
 	"shouldRefresh": false,
 	"apy": {
 		"0x06d7fcd55ae83ab2ee0c0283cc9dfd710312ffee": {
-			"type": "v3:kong_missing",
+			"type": "v3:averaged",
 			"netAPY": 0,
 			"fees": {
 				"performance": 0,
@@ -20,7 +20,7 @@
 				"inception": 0
 			},
 			"pricePerShare": {
-				"today": 0,
+				"today": 1,
 				"weekAgo": 0,
 				"monthAgo": 0
 			},

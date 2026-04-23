@@ -1,9 +1,9 @@
 {
-	"lastUpdate": "2026-02-05T13:06:14.586873+09:00",
+	"lastUpdate": "2026-04-23T11:43:59.338893+09:00",
 	"version": {
 		"major": 0,
 		"minor": 1,
-		"patch": 1
+		"patch": 2
 	},
 	"shouldRefresh": false,
 	"vaults": {
@@ -11,18 +11,21 @@
 			"address": "0x7a6e3635694952dc00f6ba4d4ad1a7b892028789",
 			"token": "0xe7c3d8c9a439fede00d2600032d5db0be71c3c29",
 			"registry": "0x0000000000000000000000000000000000000000",
+			"accountant": "0x07bce1e46f3b4f9cac74684974637c5df455dd88",
 			"type": "Yearn Vault",
 			"kind": "Multi Strategy",
 			"version": "3.0.4",
 			"activation": 24387790,
 			"chainID": 1,
 			"endorsed": true,
-			"performanceFee": 0,
+			"performanceFee": 1000,
 			"managementFee": 0,
 			"emergencyShutdown": false,
-			"lastActiveStrategies": null,
-			"lastPricePerShare": null,
-			"lastTotalAssets": null,
+			"lastActiveStrategies": [
+				"0x6f6046e59501e484152d46045ba5eecf1cab8935"
+			],
+			"lastPricePerShare": "1213919982895929069",
+			"lastTotalAssets": "1053435785108370819122308",
 			"metadata": {
 				"isRetired": false,
 				"isHidden": false,
@@ -34,11 +37,11 @@
 				"shouldUseV2APR": false,
 				"migration": {
 					"available": false,
-					"target": "0x0000000000000000000000000000000000000000",
+					"target": "0x7a6e3635694952dc00f6ba4d4ad1a7b892028789",
 					"contract": "0x0000000000000000000000000000000000000000"
 				},
 				"stability": {
-					"stability": ""
+					"stability": "Unknown"
 				},
 				"category": "Stablecoin",
 				"displayName": "",
