@@ -6,4 +6,4 @@ WORKDIR /app
 RUN go mod tidy
 RUN go mod vendor
 RUN go build -o yDaemon ./cmd
-ENTRYPOINT /app/yDaemon
+ENTRYPOINT /bin/sh -c "/app/yDaemon --chains \"$SUPPORTED_CHAIN_IDS\""
