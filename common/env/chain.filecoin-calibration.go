@@ -47,7 +47,10 @@ var FILECOIN_CALIBRATION = TChain{
 			Label:   `YEARN`,
 		},
 	},
-	APROracleContract:     TContractData{Address: common.Address{}, Block: 0},
+	APROracleContract: TContractData{
+		Address: common.HexToAddress(`0x1981AD9F44F2EA9aDd2dC4AD7D075c102C70aF92`),
+		Block:   3_085_512,
+	},
 	ExtraVaults: []models.TVaultsFromRegistry{
 		{
 			// USDFC
