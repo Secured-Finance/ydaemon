@@ -1,14 +1,20 @@
 {
-	"lastUpdate": "2026-04-23T11:43:58.854036+09:00",
+	"lastUpdate": "2026-07-31T18:25:55.042805+09:00",
 	"version": {
 		"major": 0,
-		"minor": 1,
-		"patch": 4
+		"minor": 2,
+		"patch": 5
 	},
 	"shouldRefresh": false,
 	"prices": {
 		"0x06d7fcd55ae83ab2ee0c0283cc9dfd710312ffee": {
 			"address": "0x06d7fcd55ae83ab2ee0c0283cc9dfd710312ffee",
+			"price": "0",
+			"humanizedPrice": 0,
+			"source": "yVaultV2-pps-store"
+		},
+		"0xe9fee77e65fcc7ff9cbb477ea364fcaaf077e984": {
+			"address": "0xe9fee77e65fcc7ff9cbb477ea364fcaaf077e984",
 			"price": "0",
 			"humanizedPrice": 0,
 			"source": "yVaultV2-pps-store"

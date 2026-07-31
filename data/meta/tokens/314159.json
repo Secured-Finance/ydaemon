@@ -1,8 +1,8 @@
 {
-	"lastUpdate": "2026-04-23T11:43:55.209636+09:00",
+	"lastUpdate": "2026-07-31T18:25:49.884869+09:00",
 	"version": {
 		"major": 0,
-		"minor": 1,
+		"minor": 2,
 		"patch": 0
 	},
 	"shouldRefresh": false,
@@ -34,6 +34,22 @@
 			"description": "",
 			"category": "",
 			"icon": "https://assets.smold.app/api/token/314159/0xb3042734b608a1B16e9e86B374A3f3e389B4cDf0/logo-128.png",
+			"decimals": 18,
+			"chainID": 314159
+		},
+		"0xe9fee77e65fcc7ff9cbb477ea364fcaaf077e984": {
+			"address": "0xe9fee77e65fcc7ff9cbb477ea364fcaaf077e984",
+			"underlyingTokensAddresses": [
+				"0xb3042734b608a1b16e9e86b374a3f3e389b4cdf0"
+			],
+			"type": "Yearn Vault",
+			"name": "USDFC V4",
+			"symbol": "yvUSDFC",
+			"displayName": "USDFC V4",
+			"displaySymbol": "yvUSDFC",
+			"description": "",
+			"category": "yVault",
+			"icon": "https://assets.smold.app/api/token/314159/0xE9FEe77E65fCC7ff9cbb477Ea364fcaaF077e984/logo-128.png",
 			"decimals": 18,
 			"chainID": 314159
 		}

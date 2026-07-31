@@ -53,7 +53,7 @@ var FILECOIN_CALIBRATION = TChain{
 	},
 	ExtraVaults: []models.TVaultsFromRegistry{
 		{
-			// USDFC
+			// USDFC V3
 			ChainID:         314159,
 			Address:         common.HexToAddress(`0x06D7FCd55aE83AB2Ee0C0283CC9DfD710312ffee`),
 			RegistryAddress: common.HexToAddress(`0x0000000000000000000000000000000000000000`),
@@ -63,6 +63,18 @@ var FILECOIN_CALIBRATION = TChain{
 			Type:            models.TokenTypeStandardVault,
 			Kind:            models.VaultKindMultiple,
 		},
+		{
+			// USDFC V4
+			ChainID:         314159,
+			Address:         common.HexToAddress(`0xE9FEe77E65fCC7ff9cbb477Ea364fcaaF077e984`),
+			RegistryAddress: common.HexToAddress(`0x0000000000000000000000000000000000000000`),
+			TokenAddress:    common.HexToAddress(`0xb3042734b608a1b16e9e86b374a3f3e389b4cdf0`),
+			APIVersion:      `3.0.4`,
+			BlockNumber:     3938255,
+			Type:            models.TokenTypeStandardVault,
+			Kind:            models.VaultKindMultiple,
+		},
+		
 	},
 	BlacklistedVaults:     []common.Address{},
 	ExtraTokens:           []common.Address{},
