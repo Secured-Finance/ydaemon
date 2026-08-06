@@ -1,9 +1,9 @@
 {
-	"lastUpdate": "2026-07-31T18:25:56.500633+09:00",
+	"lastUpdate": "2026-08-06T22:38:05.154121+09:00",
 	"version": {
 		"major": 0,
 		"minor": 2,
-		"patch": 5
+		"patch": 8
 	},
 	"shouldRefresh": false,
 	"apy": {
@@ -44,7 +44,7 @@
 			}
 		},
 		"0xe9fee77e65fcc7ff9cbb477ea364fcaaf077e984": {
-			"type": "v3:new_averaged",
+			"type": "v3:averaged",
 			"netAPY": 0,
 			"fees": {
 				"performance": 0,
@@ -66,7 +66,7 @@
 			},
 			"forwardAPY": {
 				"type": "v3:onchainOracle",
-				"netAPY": 0,
+				"netAPY": 0.004201820937455025,
 				"composite": {
 					"boost": null,
 					"poolAPY": null,
@@ -74,8 +74,8 @@
 					"baseAPR": null,
 					"cvxAPR": null,
 					"rewardsAPY": null,
-					"v3OracleCurrentAPR": 0,
-					"v3OracleStratRatioAPR": 0
+					"v3OracleCurrentAPR": 0.004201820937455025,
+					"v3OracleStratRatioAPR": 0.003781631052701684
 				}
 			}
 		}

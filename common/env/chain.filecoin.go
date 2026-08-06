@@ -1,0 +1,81 @@
+package env
+
+import (
+	"math"
+	"strconv"
+
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/yearn/ydaemon/internal/models"
+)
+
+var FILECOIN = TChain{
+	ID:              314,
+	RpcURI:          `https://api.node.glif.io/rpc/v1`,
+	SubgraphURI:     ``,
+	EtherscanURI:    `https://filecoin.blockscout.com/api`,
+	MaxBlockRange:   10_000,
+	MaxBatchSize:    math.MaxInt64,
+	// AvgBlocksPerDay: 28_800, // ~30 second blocks
+	AvgBlocksPerDay: 1_440, // ~60 second blocks
+	CanUseWebsocket: false,
+	LensContract: TContractData{
+		Address: common.Address{},
+		Block:   0,
+	},
+	MulticallContract: TContractData{
+		Address: common.HexToAddress(`0xcA11bde05977b3631167028862bE2a173976CA11`),
+		Block:   0,
+	},
+	Coin: models.TERC20Token{
+		Address:                   DEFAULT_COIN_ADDRESS,
+		UnderlyingTokensAddresses: []common.Address{},
+		Type:                      models.TokenTypeNative,
+		Name:                      `Filecoin`,
+		Symbol:                    `FIL`,
+		DisplayName:               `Filecoin`,
+		DisplaySymbol:             `FIL`,
+		Description:               `Filecoin is a peer-to-peer digital storage network built on top of IPFS.`,
+		Icon:                      BASE_ASSET_URL + strconv.FormatUint(314, 10) + `/` + DEFAULT_COIN_ADDRESS.Hex() + `/logo-128.png`,
+		Decimals:                  18,
+		ChainID:                   314,
+	},
+	Registries:            []TContractData{
+		{
+			Address: common.HexToAddress("0x0377b4daDDA86C89A0091772B79ba67d0E5F7198"),
+			Version: 4,
+			Block:   6_253_742,
+			Label:   `YEARN`,
+		},
+	},
+	APROracleContract: TContractData{
+		Address: common.HexToAddress(`0x1981AD9F44F2EA9aDd2dC4AD7D075c102C70aF92`),
+		Block:   6_253_747,
+	},
+	ExtraVaults: []models.TVaultsFromRegistry{
+		{
+			// USDFC
+			ChainID:         314,
+			Address:         common.HexToAddress(`0x9f59bB0A1dbfad10443Fba08D41c75b0664Bf41B`),
+			RegistryAddress: common.HexToAddress(`0x0000000000000000000000000000000000000000`),
+			TokenAddress:    common.HexToAddress(`0x80B98d3aa09ffff255c3ba4A241111Ff1262F045`),
+			APIVersion:      `3.0.4`,
+			BlockNumber:     3938255,
+			Type:            models.TokenTypeStandardVault,
+			Kind:            models.VaultKindMultiple,
+		},
+		
+	},
+	BlacklistedVaults:     []common.Address{},
+	ExtraTokens:           []common.Address{},
+	IgnoredTokens:         []common.Address{},
+	Curve: TChainCurve{
+		RegistryAddress: common.Address{},
+		FactoryAddress:  common.Address{},
+		PoolsURIs:       []string{},
+		GaugesURI:       ``,
+	},
+	ExtraURI: TChainExtraURI{
+		GammaMerklURI: ``,
+		PendleCoreURI: ``,
+	},
+}

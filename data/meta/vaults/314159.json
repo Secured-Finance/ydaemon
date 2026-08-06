@@ -1,5 +1,5 @@
 {
-	"lastUpdate": "2026-07-31T18:25:46.545912+09:00",
+	"lastUpdate": "2026-08-06T22:37:55.577755+09:00",
 	"version": {
 		"major": 0,
 		"minor": 2,
@@ -103,7 +103,7 @@
 				"isAggregator": false,
 				"isBoosted": false,
 				"isAutomated": false,
-				"isHighlighted": false,
+				"isHighlighted": true,
 				"isPool": false,
 				"shouldUseV2APR": false,
 				"migration": {

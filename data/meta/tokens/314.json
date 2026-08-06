@@ -1,0 +1,41 @@
+{
+	"lastUpdate": "2026-08-06T22:37:56.805799+09:00",
+	"version": {
+		"major": 0,
+		"minor": 1,
+		"patch": 0
+	},
+	"shouldRefresh": false,
+	"tokens": {
+		"0x80b98d3aa09ffff255c3ba4a241111ff1262f045": {
+			"address": "0x80b98d3aa09ffff255c3ba4a241111ff1262f045",
+			"underlyingTokensAddresses": [],
+			"type": "",
+			"name": "USD for Filecoin Community",
+			"symbol": "USDFC",
+			"displayName": "USD for Filecoin Community",
+			"displaySymbol": "USDFC",
+			"description": "",
+			"category": "",
+			"icon": "https://assets.smold.app/api/token/314/0x80B98d3aa09ffff255c3ba4A241111Ff1262F045/logo-128.png",
+			"decimals": 18,
+			"chainID": 314
+		},
+		"0x9f59bb0a1dbfad10443fba08d41c75b0664bf41b": {
+			"address": "0x9f59bb0a1dbfad10443fba08d41c75b0664bf41b",
+			"underlyingTokensAddresses": [
+				"0x80b98d3aa09ffff255c3ba4a241111ff1262f045"
+			],
+			"type": "Yearn Vault",
+			"name": "USDFC",
+			"symbol": "yvUSDFC",
+			"displayName": "USDFC",
+			"displaySymbol": "yvUSDFC",
+			"description": "",
+			"category": "yVault",
+			"icon": "https://assets.smold.app/api/token/314/0x9f59bB0A1dbfad10443Fba08D41c75b0664Bf41B/logo-128.png",
+			"decimals": 18,
+			"chainID": 314
+		}
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"lastUpdate": "2026-08-06T22:38:01.902383+09:00",
+	"version": {
+		"major": 0,
+		"minor": 1,
+		"patch": 3
+	},
+	"shouldRefresh": false,
+	"prices": {
+		"0x9f59bb0a1dbfad10443fba08d41c75b0664bf41b": {
+			"address": "0x9f59bb0a1dbfad10443fba08d41c75b0664bf41b",
+			"price": "0",
+			"humanizedPrice": 0,
+			"source": "yVaultV2-pps-store"
+		}
+	}
+}

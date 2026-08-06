@@ -1,31 +1,28 @@
 {
-	"lastUpdate": "2026-08-06T22:37:59.298607+09:00",
+	"lastUpdate": "2026-08-06T22:37:55.294349+09:00",
 	"version": {
 		"major": 0,
 		"minor": 1,
-		"patch": 3
+		"patch": 1
 	},
 	"shouldRefresh": false,
 	"vaults": {
-		"0x7a6e3635694952dc00f6ba4d4ad1a7b892028789": {
-			"address": "0x7a6e3635694952dc00f6ba4d4ad1a7b892028789",
-			"token": "0xe7c3d8c9a439fede00d2600032d5db0be71c3c29",
+		"0x9f59bb0a1dbfad10443fba08d41c75b0664bf41b": {
+			"address": "0x9f59bb0a1dbfad10443fba08d41c75b0664bf41b",
+			"token": "0x80b98d3aa09ffff255c3ba4a241111ff1262f045",
 			"registry": "0x0000000000000000000000000000000000000000",
-			"accountant": "0x07bce1e46f3b4f9cac74684974637c5df455dd88",
 			"type": "Yearn Vault",
 			"kind": "Multi Strategy",
 			"version": "3.0.4",
-			"activation": 24387790,
-			"chainID": 1,
+			"activation": 3938255,
+			"chainID": 314,
 			"endorsed": true,
-			"performanceFee": 1000,
+			"performanceFee": 0,
 			"managementFee": 0,
 			"emergencyShutdown": false,
-			"lastActiveStrategies": [
-				"0x6f6046e59501e484152d46045ba5eecf1cab8935"
-			],
-			"lastPricePerShare": "1217874956846467989",
-			"lastTotalAssets": "2076914321234057091576702",
+			"lastActiveStrategies": null,
+			"lastPricePerShare": null,
+			"lastTotalAssets": null,
 			"metadata": {
 				"isRetired": false,
 				"isHidden": false,
@@ -37,16 +34,16 @@
 				"shouldUseV2APR": false,
 				"migration": {
 					"available": false,
-					"target": "0x7a6e3635694952dc00f6ba4d4ad1a7b892028789",
+					"target": "0x0000000000000000000000000000000000000000",
 					"contract": "0x0000000000000000000000000000000000000000"
 				},
 				"stability": {
-					"stability": "Unknown"
+					"stability": ""
 				},
 				"category": "Stablecoin",
 				"displayName": "",
 				"displaySymbol": "",
-				"description": "Multi strategy JPYC vault. \u003cbr/\u003e\u003cbr/\u003eMulti strategy vaults are (wait for it) vaults that contain multiple strategies. Multi strategy vaults give the vault creator flexibility to balance risk and opportunity across multiple different strategies.",
+				"description": "",
 				"sourceURI": "",
 				"uiNotice": "",
 				"protocols": null,

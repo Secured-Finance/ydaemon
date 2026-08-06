@@ -27,7 +27,9 @@ env:
     KONG_API_URL: ${{ vars.KONG_API_URL }}
     KONG_POSTGRES_DSN: ${{ secrets.KONG_POSTGRES_DSN }}
     RPC_URI_FOR_1: ${{ secrets.RPC_URI_FOR_1 }}
+    RPC_URI_FOR_314: ${{ secrets.RPC_URI_FOR_314 }}
     RPC_URI_FOR_314159: ${{ secrets.RPC_URI_FOR_314159 }}
+    RPC_AUTH_TOKEN_FOR_314: ${{ secrets.RPC_AUTH_TOKEN_FOR_314 }}
     RPC_AUTH_TOKEN_FOR_314159: ${{ secrets.RPC_AUTH_TOKEN_FOR_314159 }}
 
 jobs:
@@ -116,6 +118,7 @@ jobs:
                     --set-env-vars=SUPPORTED_CHAIN_IDS='${SUPPORTED_CHAIN_IDS}' \
                     --set-env-vars=KONG_API_URL=${KONG_API_URL},KONG_POSTGRES_DSN=${KONG_POSTGRES_DSN} \
                     --set-env-vars=RPC_URI_FOR_1=${RPC_URI_FOR_1} \
+                    --set-env-vars=RPC_URI_FOR_314=${RPC_URI_FOR_314},RPC_AUTH_TOKEN_FOR_314=${RPC_AUTH_TOKEN_FOR_314} \
                     --set-env-vars=RPC_URI_FOR_314159=${RPC_URI_FOR_314159},RPC_AUTH_TOKEN_FOR_314159=${RPC_AUTH_TOKEN_FOR_314159} \
                     --execution-environment=gen2 \
                     --add-volume=name=data-volume,type=cloud-storage,bucket=${{env.BUCKET_NAME}} \
