@@ -25,7 +25,7 @@ func SetEnv() {
 		baseKey := `RPC_URI_FOR_`
 		chainID := strconv.FormatUint(chain.ID, 10)
 		RPCURI, exists := os.LookupEnv(baseKey + chainID)
-		if !exists {
+		if !exists || strings.TrimSpace(RPCURI) == "" {
 			logs.Debug(baseKey + chainID + " not set, using default value")
 		} else {
 			chain := CHAINS[chain.ID]

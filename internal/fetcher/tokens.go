@@ -362,6 +362,9 @@ func loadCurvePools(chainID uint64) map[string][]common.Address {
 	}
 
 	coinsForPool := make(map[string][]common.Address)
+	if chain.Curve.FactoryAddress == (common.Address{}) {
+		return coinsForPool
+	}
 
 	/**********************************************************************************************
 	** The first step is to prepare the multicall, connecting to the multicall instance and
