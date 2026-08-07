@@ -1,14 +1,14 @@
 {
-	"lastUpdate": "2026-08-06T22:38:02.571799+09:00",
+	"lastUpdate": "2026-08-07T23:01:18.300083+09:00",
 	"version": {
 		"major": 0,
 		"minor": 1,
-		"patch": 3
+		"patch": 5
 	},
 	"shouldRefresh": false,
 	"apy": {
 		"0x9f59bb0a1dbfad10443fba08d41c75b0664bf41b": {
-			"type": "v3:new_averaged",
+			"type": "v3:averaged",
 			"netAPY": 0,
 			"fees": {
 				"performance": 0,

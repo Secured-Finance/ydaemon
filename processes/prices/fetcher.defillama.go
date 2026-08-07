@@ -26,6 +26,7 @@ var LLAMA_CHAIN_NAMES = map[uint64]string{
 	100:    `xdai`,
 	137:    `polygon`,
 	250:    `fantom`,
+	314:    `filecoin`,
 	8453:   `base`,
 	42161:  `arbitrum`,
 	747474: `katana`,

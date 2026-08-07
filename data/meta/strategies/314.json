@@ -1,9 +1,9 @@
 {
-	"lastUpdate": "2026-08-06T22:37:57.312414+09:00",
+	"lastUpdate": "2026-08-07T23:01:15.159451+09:00",
 	"version": {
 		"major": 0,
 		"minor": 1,
-		"patch": 7
+		"patch": 11
 	},
 	"shouldRefresh": false,
 	"strategies": {
@@ -27,8 +27,8 @@
 			"lastTotalDebt": "0",
 			"lastTotalLoss": "0",
 			"lastTotalGain": "0",
-			"lastPerformanceFee": "1000",
-			"lastReport": "1786006260",
+			"lastPerformanceFee": "500",
+			"lastReport": "1786107870",
 			"lastDebtRatio": "0",
 			"netAPR": 0,
 			"aprType": "forward",

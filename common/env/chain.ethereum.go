@@ -235,9 +235,7 @@ var ETHEREUM = TChain{
 	Curve: TChainCurve{
 		RegistryAddress: common.HexToAddress(`0x90E00ACe148ca3b23Ac1bC8C240C2a7Dd9c2d7f5`),
 		FactoryAddress:  common.HexToAddress(`0xF18056Bbd320E96A48e3Fbf8bC061322531aac99`),
-		PoolsURIs: []string{
-			`https://api.curve.finance/api/getPools/all/ethereum`,
-		},
+		PoolsURIs: []string{},
 		GaugesURI: `https://api.curve.finance/api/getAllGauges?blockchainId=ethereum`,
 	},
 	ExtraURI: TChainExtraURI{
